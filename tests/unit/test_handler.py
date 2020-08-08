@@ -3,7 +3,7 @@ from model.aws.ec2 import AWSEvent
 from model.aws.ec2 import Marshaller
 from model.aws.ec2.ec2_instance_state_change_notification import EC2InstanceStateChangeNotification
 
-from anayze_stock_function.analyzer import app
+from analyze_stock_function.analyzer import app
 
 
 @pytest.fixture()
