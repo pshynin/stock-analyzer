@@ -8,7 +8,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: sam build
+      - name: Sam build
         uses: youyo/aws-sam-action/python3.8@master
         with:
           sam_command: build
@@ -17,7 +17,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
 
-      - name: sam deploy
+      - name: Lambda deploy
         uses: youyo/aws-sam-action/python3.8@master
         with:
           sam_command: 'deploy --no-fail-on-empty-changeset'
