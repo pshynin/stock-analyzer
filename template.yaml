@@ -1,8 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 Description: >
-  stock-analyzer
-
   SAM Template for stock-analyzer
 
 Globals:
@@ -11,25 +9,32 @@ Globals:
 
 Resources:
   AnalyzeStockFunction:
-    Type: AWS::Serverless::Function
+    Type: null
+    # AWS::Serverless::Function
     Properties:
-      CodeUri: analyze_stock_function
-      Handler: analyzer/app.lambda_handler
-      Runtime: python3.8
+      CodeUri: null
+      # analyze_stock_function
+      Handler: null
+      # analyzer/app.lambda_handler
+      Runtime: null
+      # python3.8
       Events:
         Analyzer:
-          Type: CloudWatchEvent
+          Type: null
+          # CloudWatchEvent
           Properties:
             Pattern:
-              source:
-                - aws.ec2
-              detail-type:
-                - EC2 Instance State-change Notification
+              source: null
+              # - aws.ec2
+              detail-type: null
+              # - EC2 Instance State-change Notification
 
 Outputs:
   AnalyzeStockFunction:
     Description: "Analyzer Lambda Function ARN"
-    Value: !GetAtt AnalyzeStockFunction.Arn
+    Value: null
+    # !GetAtt AnalyzeStockFunction.Arn
   AnalyzeStockFunctionIamRole:
     Description: "Implicit IAM Role created for Analyze Stock function"
-    Value: !GetAtt AnalyzeStockFunctionRole.Arn
+    Value: null
+    # !GetAtt AnalyzeStockFunctionRole.Arn
