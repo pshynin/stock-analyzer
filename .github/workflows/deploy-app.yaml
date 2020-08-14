@@ -1,5 +1,7 @@
 on: [push]
 
+name: build and deploy
+
 jobs:
   aws_sam:
     runs-on: ubuntu-latest
