@@ -15,8 +15,9 @@ resource "aws_iam_role" "lambda_role" {
 
   lifecycle {
     ignore_changes = [
-      assume_role_policy,  # Ignore changes to assume role policy
+      assume_role_policy,  # Ignore changes to assume role policy, other attribute changes will be applied
     ]
+    prevent_destroy = true  # Prevents the IAM role from being destroyed
   }
 }
 
