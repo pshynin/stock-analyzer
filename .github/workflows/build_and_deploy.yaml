@@ -54,11 +54,10 @@ jobs:
       - name: Import existing resources
         run: |
           cd terraform
+          terraform init
           terraform import aws_iam_role.lambda_role ${{ env.IAM_ROLE_ARN }}
           terraform import aws_iam_policy.lambda_policy ${{ env.IAM_POLICY_ARN }}
 
       - name: Deploy Lambda function
         run: |
-          cd terraform
-          terraform init
           terraform apply -auto-approve
