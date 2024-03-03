@@ -1,8 +1,9 @@
 # IAM role for the Lambda function
 resource "aws_iam_role" "lambda_role" {
-  name               = var.iam_role_name
+  name = var.iam_role_name
+
   assume_role_policy = jsonencode({
-    Version = "2012-10-17",
+    Version   = "2012-10-17",
     Statement = [{
       Effect    = "Allow",
       Principal = {
@@ -11,6 +12,12 @@ resource "aws_iam_role" "lambda_role" {
       Action    = "sts:AssumeRole"
     }]
   })
+
+  lifecycle {
+    ignore_changes = [
+      assume_role_policy,  # Ignore changes to assume role policy
+    ]
+  }
 }
 
 # IAM policy for the Lambda function
@@ -19,7 +26,7 @@ resource "aws_iam_policy" "lambda_policy" {
   description = "Policy for ${var.iam_role_name} Lambda function"
 
   policy = jsonencode({
-    Version = "2012-10-17",
+    Version   = "2012-10-17",
     Statement = [{
       Effect   = "Allow",
       Action   = "logs:CreateLogGroup",
