@@ -53,7 +53,7 @@ jobs:
         run: |
           cd terraform
           terraform init
-          terraform import aws_iam_role.lambda_role pshynin-analyze_stocks-role
+          terraform import aws_iam_role.lambda_role arn:aws:iam::129254356074:role/pshynin-analyze-stocks-role
           terraform import aws_iam_policy.lambda_policy arn:aws:iam::129254356074:policy/pshynin-analyze-stocks-policy
 
       - name: Deploy Lambda function
