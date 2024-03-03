@@ -3,16 +3,19 @@ terraform {
 }
 
 import {
+  provider = "aws"
   id = "aws_lambda_function.pshynin_analyze_stocks"
   to = "pshynin-analyze-stocks"
 }
 
 import {
+  provider = "aws"
   id = "aws_iam_role.lambda_role"
   to = "pshynin-analyze-stocks-role"
 }
 
 import {
+  provider = "aws"
   id = "aws_iam_policy.lambda_policy"
   to = "pshynin-analyze-stocks-policy"
 }
