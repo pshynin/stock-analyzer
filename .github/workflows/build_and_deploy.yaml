@@ -1,9 +1,15 @@
 name: Deploy Lambda Function
 
 on:
-  push:
+  pull_request:
     branches:
       - master
+
+# TODO: replace once ready to deploy
+#on:
+#  push:
+#    branches:
+#      - master
 
 jobs:
   deploy:
@@ -30,6 +36,8 @@ jobs:
       - name: Build Lambda function ZIP file
         run: |
           cd lambda
+          pwd
+          ls -la 
           zip -r analyze_stocks.zip analyze_stocks.py
 
       - name: Deploy Lambda function
