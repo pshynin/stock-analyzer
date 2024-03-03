@@ -11,17 +11,17 @@ on:
 #    branches:
 #      - master
 
-env:
-  LAMBDA_NAME: analyze_stocks
-  PYTHON_VERSION: 3.x
-  TF_VERSION: 0.15.0
-  IAM_ROLE_ARN: arn:aws:iam::129254356074:role/pshynin-${{ env.LAMBDA_NAME }}-role
-  IAM_POLICY_ARN: arn:aws:iam::129254356074:policy/pshynin-${{ env.LAMBDA_NAME }}-policy
-
 jobs:
   deploy:
     name: Deploy Lambda Function
     runs-on: ubuntu-latest
+
+    env:
+      LAMBDA_NAME: analyze_stocks
+      PYTHON_VERSION: 3.x
+      TF_VERSION: 0.15.0
+      IAM_ROLE_ARN: arn:aws:iam::129254356074:role/pshynin-${{ env.LAMBDA_NAME }}-role
+      IAM_POLICY_ARN: arn:aws:iam::129254356074:policy/pshynin-${{ env.LAMBDA_NAME }}-policy
 
     steps:
       - name: Checkout repository
@@ -56,7 +56,7 @@ jobs:
       - name: Build Lambda function ZIP file
         run: |
           cd lambda 
-          zip -r analyze_stocks.zip analyze_stocks.py
+          zip -r ${{ env.LAMBDA_NAME }}.zip ${{ env.LAMBDA_NAME }}.py
           pwd
           ls -la
 
