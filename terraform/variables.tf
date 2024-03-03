@@ -15,7 +15,7 @@ variable "lambda_function_runtime" {
 
 variable "lambda_function_zip_path" {
   description = "Path to the Lambda function ZIP file"
-  default     = "lambda/analyze_stocks.zip"
+  default     = "stock-analyzer/lambda/analyze_stocks.zip"
 }
 
 variable "aws_region" {
