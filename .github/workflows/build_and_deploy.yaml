@@ -1,9 +1,22 @@
 name: Deploy Lambda Function
 
+# TODO: uncomment this for testing your local branch
 on:
-  push:
+  pull_request:
     branches:
       - master
+
+#on:
+#  push:
+#    branches:
+#      - master
+
+env:
+  LAMBDA_NAME: analyze_stocks
+  PYTHON_VERSION: 3.x
+  TF_VERSION: 0.15.0
+  IAM_ROLE_ARN: arn:aws:iam::129254356074:role/pshynin-${{ env.LAMBDA_NAME }}-role
+  IAM_POLICY_ARN: arn:aws:iam::129254356074:policy/pshynin-${{ env.LAMBDA_NAME }}-policy
 
 jobs:
   deploy:
@@ -17,7 +30,12 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
 
       - name: Install dependencies
         run: |
@@ -25,7 +43,15 @@ jobs:
           pip install awscli
 
       - name: Authenticate with AWS
-        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set default.region us-east-1
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+# TODO: delete if the one above works
+#      - name: Authenticate with AWS
+#        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }} && aws configure set default.region us-east-1
 
       - name: Build Lambda function ZIP file
         run: |
@@ -33,6 +59,12 @@ jobs:
           zip -r analyze_stocks.zip analyze_stocks.py
           pwd
           ls -la
+
+      - name: Import existing resources
+        run: |
+          cd terraform
+          terraform import aws_iam_role.lambda_role ${{ IAM_ROLE_ARN }}
+          terraform import aws_iam_policy.lambda_policy ${{ IAM_POLICY_ARN }}
 
       - name: Deploy Lambda function
         run: |
