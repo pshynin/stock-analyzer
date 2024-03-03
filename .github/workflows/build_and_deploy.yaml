@@ -29,8 +29,10 @@ jobs:
 
       - name: Build Lambda function ZIP file
         run: |
-          cd lambda
+          cd lambda 
           zip -r analyze_stocks.zip analyze_stocks.py
+          pwd
+          ls -la
 
       - name: Deploy Lambda function
         run: |
