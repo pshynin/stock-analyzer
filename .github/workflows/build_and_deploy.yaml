@@ -1,15 +1,9 @@
 name: Deploy Lambda Function
 
 on:
-  pull_request:
+  push:
     branches:
       - master
-
-# TODO: replace once ready to deploy
-#on:
-#  push:
-#    branches:
-#      - master
 
 jobs:
   deploy:
