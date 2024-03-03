@@ -53,6 +53,8 @@ jobs:
         run: |
           cd terraform
           terraform init
+          terraform plan
+          ls -la
           terraform state list
           terraform state show
           terraform state show aws_lambda_function.analyze_stocks
