@@ -49,6 +49,12 @@ jobs:
           pwd
           ls -la
 
+      - name: List Terraform state
+        run: terraform state list
+
+      - name: Show Terraform state
+        run: terraform state show
+
       - name: Deploy Lambda function
         run: |
           cd terraform
