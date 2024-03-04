@@ -55,6 +55,4 @@ jobs:
           terraform import aws_lambda_function.pshynin_analyze_stocks pshynin-analyze-stocks
           terraform plan
           ls -la
-#          terraform state list
-#          terraform state show aws_lambda_function.analyze_stocks
           terraform apply -auto-approve
