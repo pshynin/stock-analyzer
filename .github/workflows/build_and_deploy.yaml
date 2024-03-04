@@ -63,3 +63,8 @@ jobs:
           terraform state show
           terraform state show aws_lambda_function.analyze_stocks
           terraform apply -auto-approve
+          
+      - name: Save state and output
+        run: |
+          echo "{name}={value}" >> $GITHUB_STATE
+          echo "{name}={value}" >> $GITHUB_OUTPUT
