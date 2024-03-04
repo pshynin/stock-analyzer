@@ -7,14 +7,16 @@ on:
     branches:
       - master
 
+env:
+  PYTHON_VERSION: 3.x
+  TF_VERSION: 1.5.0
+
 jobs:
   deploy:
     name: Deploy Lambda Function
     runs-on: ubuntu-latest
 
-    env:
-      PYTHON_VERSION: 3.x
-      TF_VERSION: 1.5.0
+
 
     steps:
       - name: Checkout repository
@@ -59,12 +61,6 @@ jobs:
           terraform import aws_lambda_function.pshynin_analyze_stocks pshynin-analyze-stocks
           terraform plan
           ls -la
-          terraform state list
-          terraform state show
-          terraform state show aws_lambda_function.analyze_stocks
+#          terraform state list
+#          terraform state show aws_lambda_function.analyze_stocks
           terraform apply -auto-approve
-          
-      - name: Save state and output
-        run: |
-          echo "{name}={value}" >> $GITHUB_STATE
-          echo "{name}={value}" >> $GITHUB_OUTPUT
