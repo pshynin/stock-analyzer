@@ -5,7 +5,7 @@ variable "lambda_function_name" {
 
 variable "lambda_function_handler" {
   description = "Handler function for the Lambda function"
-  default     = "analyze_stocks.handler"
+  default     = "analyze_stocks.lambda_handler"
 }
 
 variable "lambda_function_runtime" {
