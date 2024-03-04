@@ -1,4 +1,4 @@
-name: Deploy Lambda Function
+name: Verify Lambda Function
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy Lambda Function
+    name: Verify Lambda Function
     runs-on: ubuntu-latest
 
     env:
