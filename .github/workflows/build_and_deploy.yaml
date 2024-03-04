@@ -53,9 +53,10 @@ jobs:
         run: |
           cd terraform
           terraform init
-          terraform import aws_lambda_function.pshynin_analyze_stocks pshynin-analyze-stocks
           terraform import aws_iam_role.lambda_role pshynin-analyze-stocks-role
           terraform import aws_iam_policy.lambda_policy arn:aws:iam::129254356074:policy/pshynin-analyze-stocks-policy
+          terraform import aws_iam_role_policy_attachment.lambda_policy_attachment pshynin-analyze-stocks-role
+          terraform import aws_lambda_function.pshynin_analyze_stocks pshynin-analyze-stocks
           terraform plan
           ls -la
           terraform state list
